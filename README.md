@@ -1,8 +1,9 @@
-# flask-celery-user-service
+# **flask-celery-user-service**
 A simple Flask REST API integrated with Celery for asynchronous background tasks using Redis as a broker.
 This project demonstrates user CRUD operations with MySQL and background welcome email task processing via Celery.
 
-FLASK_APP/
+## 📁 **Project Structure**
+```FLASK_APP/
 ├── app.py                    # Flask entrypoint
 ├── celery_app.py              # Celery configuration
 ├── celery_status.py           # Task status check example
@@ -23,25 +24,25 @@ FLASK_APP/
 └── dump.rdb                   # Redis dump file
 
 
-⚙️ Setup Instructions
+⚙️ **Setup Instructions**
 
 1️⃣ Clone the repository
 
 git clone https://github.com/<your-username>/flask-celery-app.git
 cd flask-celery-app
 
-2️⃣ Create and activate virtual environment
-
+2️⃣ **Create and activate virtual environment
+**
 python3 -m venv flask-env
 source flask-env/bin/activate  # on macOS/Linux
 flask-env\Scripts\activate     # on Windows
 
 
-3️⃣ Install dependencies
+3️⃣ **Install dependencies**
 
 pip install -r requirements.txt
 
-4️⃣ Set up MySQL
+4️⃣ **Set up MySQL**
 
 Create database and table:
 
@@ -57,12 +58,12 @@ CREATE TABLE user (
   password VARCHAR(100)
 );
 
-5️⃣ Start Redis
+5️⃣ **Start Redis**
 
 You can use Docker:
 docker run -d -p 6379:6379 redis
 
-6️⃣ Start Celery worker
+6️⃣ **Start Celery worker**
 
 In one terminal:
 
@@ -72,7 +73,7 @@ You should see:
 
 worker@hostname ready.
 
-7️⃣ Start Flask app
+7️⃣ **Start Flask app**
 
 In another terminal:
 
@@ -92,8 +93,8 @@ PATCH	/user/patch/<id>	Partial update
 GET	/user/page/limit/<limit>/page/<page>	Pagination support
 
 
-📬 Example CURL Requests
-
+📬 **Example CURL Requests
+**
 ➕ Add User
 
 curl -X POST http://127.0.0.1:5003/user/addone \
@@ -114,11 +115,11 @@ Response:
   "email_task_id": "4fcbcd47-2c1d-4d3e-9f4d-1234abcde567"
 }
 
-🔍 Check Celery Task Status
+🔍 **Check Celery Task Status**
 
 python celery_status.py
 
-🧠 How It Works
+🧠 **How It Works**
 
 When a new user is added via /user/addone,
 Flask validates and stores the record in MySQL.
@@ -130,7 +131,7 @@ Redis acts as the broker and backend, tracking task results.
 
 You can monitor task execution via celery_status.py.
 
-🐞 Troubleshooting
+🐞 **Troubleshooting**
 Issue	                                    Solution
 redis.exceptions.ConnectionError	    Ensure Redis is running on port 6379
 ModuleNotFoundError: tasks.user_tasks	Run Celery from project root
